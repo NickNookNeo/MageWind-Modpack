@@ -1,0 +1,21 @@
+name: Mirror to Codeberg
+
+on:
+  push:
+    branches: [ main, master ] # Change to your default branch names
+
+jobs:
+  codeberg_mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mirror to Codeberg
+        uses: yesolutions/mirror-repository@v1.4.0 # Or an equivalent trusted mirror action
+        with:
+          target_url: https://codeberg.org{{ github.repository_owner }}/${{ github.event.repository.name }}.git
+          target_username: ${{ github.repository_owner }}
+          target_token: ${{ secrets.CODEBERG_TOKEN }}
