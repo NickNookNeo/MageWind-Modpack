@@ -2,7 +2,7 @@ name: Mirror to Codeberg
 
 on:
   push:
-    branches: [ main, master ] # Change to your default branch names
+    branches: [ main, master ]
 
 jobs:
   codeberg_mirror:
@@ -13,9 +13,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Mirror to Codeberg
-        uses: yesolutions/mirror-action@master
-        with:
-          target_url: https://codeberg.org{{ github.repository_owner }}/${{ github.event.repository.name }}.git
-          target_username: ${{ github.repository_owner }}
-          target_token: ${{ secrets.CODEBERG_TOKEN }}
+      - name: Push to Codeberg
+        env:
+          CB_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+        run: |
+          # Push all branches and tags to Codeberg forcefully to keep them mirrored
+          git push --prune --force https://${{ github.repository_owner }}:${CB_TOKEN}@codeberg.org/${{ github.repository_owner }}/${{ github.event.repository.name }}.git refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
