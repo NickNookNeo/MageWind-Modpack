@@ -2,4 +2,4 @@
 
 Updates should release periodically.
 
-/Mungus.zip
+[Download Latest Version](/Mungus.zip)
