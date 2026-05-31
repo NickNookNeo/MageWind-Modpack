@@ -12,10 +12,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          lfs: true # Crucial: Instructs GitHub Actions to download the physical LFS assets
 
       - name: Push to Codeberg
         env:
           CB_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
         run: |
-          # Pushing directly to your specific NickAtLinux Codeberg repository
+          # Allow LFS to continue even if tracking metadata has non-fatal verification warnings
+          git config lfs.allowincompletepush true
+          
+          # Push everything to Codeberg
           git push --prune --force https://NickAtLinux:${CB_TOKEN}@codeberg.org/NickAtLinux/Narnia-Server-Client-Modpack-mirror.git refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
