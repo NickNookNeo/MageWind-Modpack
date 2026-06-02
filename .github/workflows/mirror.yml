@@ -22,4 +22,4 @@ jobs:
           git config lfs.allowincompletepush true
           
           # Push everything to Codeberg
-          git push --prune --force https://NickAtLinux:${CB_TOKEN}@codeberg.org/NickAtLinux/Narnia-Server-Client-Modpack-mirror.git refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
+          git push --prune --force https://NickAtLinux:${CB_TOKEN}@codeberg.org/NickAtLinux/MageWind-Modpack.git refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
